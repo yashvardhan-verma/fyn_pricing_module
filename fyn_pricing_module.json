@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "4efe1004-8780-4418-8efd-fdb530755c29",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27419598"
+	},
+	"item": [
+		{
+			"name": "Pricing APIs",
+			"item": [
+				{
+					"name": "add new pricing config",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTEzMzA2NiwiZXhwIjoxNjkxMjE5NDY2fQ.c52wYFNls8sbEbycOCb4jdIV69y0TkLvBR0DSI6AQkU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pricingConfig\": {\n        \"name\": \"August Pricing\",\n        \"description\": \"pricing for august\",\n        \"enabled\": true,\n        \"start_date\": \"2023-08-01\",\n        \"end_date\": \"2023-08-31\"\n    },\n    \"distanceBasePrice\": [\n        {\n            \"day_of_week\": \"tue\",\n            \"max_distance\": 3,\n            \"additional_price_per_km\": 30,\n            \"price\": 80\n        },\n        {\n            \"day_of_week\": \"wed\",\n            \"max_distance\": 3,\n            \"additional_price_per_km\": 30,\n            \"price\": 80\n        },\n        {\n            \"day_of_week\": \"thur\",\n            \"max_distance\": 3,\n            \"additional_price_per_km\": 30,\n            \"price\": 80\n        },\n        {\n            \"day_of_week\": \"sat\",\n            \"max_distance\": 3.5,\n            \"additional_price_per_km\": 30,\n            \"price\": 90\n        },\n        {\n            \"day_of_week\": \"mon\",\n            \"max_distance\": 3.5,\n            \"additional_price_per_km\": 30,\n            \"price\": 90\n        },\n        {\n            \"day_of_week\": \"sun\",\n            \"max_distance\": 3.5,\n            \"additional_price_per_km\": 30,\n            \"price\": 95\n        }\n    ],\n    \"timeMultiplierFactor\": [\n        {\n            \"start_time_in_hours\": 0,\n            \"end_time_in_hours\": 1,\n            \"multiplier\": 1\n        },\n        {\n            \"start_time_in_hours\": 1,\n            \"end_time_in_hours\": 2,\n            \"multiplier\": 1.25\n        },\n        {\n            \"start_time_in_hours\": 2,\n            \"end_time_in_hours\": 3,\n            \"multiplier\": 2.2\n        }\n    ],\n    \"waitingCharges\": {\n        \"initial_waiting_time\": 3,\n        \"charge_per_unit_time\": 5,\n        \"time_multiplier\": 3\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/config",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculate price",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTIxOTc4MCwiZXhwIjoxNjkxMzA2MTgwfQ.qi9wY6f6n06lR_Myy52HhPXZtq4-5hsd2Cx81LU60g4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/calculate?pricingConfigId=64cde8abea8cb4246622ec7b&distanceInKM=3&waitingTimeInMin=4&rideTimeStart=2023-08-04T09%3A01%3A19.500Z&rideTimeEnd=2023-08-04T09%3A30%3A20.500Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "pricingConfigId",
+									"value": "64cde8abea8cb4246622ec7b"
+								},
+								{
+									"key": "distanceInKM",
+									"value": "3"
+								},
+								{
+									"key": "waitingTimeInMin",
+									"value": "4"
+								},
+								{
+									"key": "rideTimeStart",
+									"value": "2023-08-04T09%3A01%3A19.500Z"
+								},
+								{
+									"key": "rideTimeEnd",
+									"value": "2023-08-04T09%3A30%3A20.500Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update distance-base-price",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTIxOTc4MCwiZXhwIjoxNjkxMzA2MTgwfQ.qi9wY6f6n06lR_Myy52HhPXZtq4-5hsd2Cx81LU60g4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"64cde8abea8cb4246622ec7e\", \n    \"additional_price_per_km\": 30,\n    \"max_distance\": 4,\n    \"price\": 80\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/distance-base-price",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"distance-base-price"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pricing-config",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTIxOTc4MCwiZXhwIjoxNjkxMzA2MTgwfQ.qi9wY6f6n06lR_Myy52HhPXZtq4-5hsd2Cx81LU60g4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"64cde8abea8cb4246622ec7b\",\n    \"name\": \"Aug Pricing Config\",\n    \"description\": \"some desc\",\n    \"enabled\": true,\n    \"start_date\": \"2023-08-01\",\n    \"end_date\": \"2023-08-31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/update-pricing-config",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"update-pricing-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update time-multiplier-factor",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTIxOTc4MCwiZXhwIjoxNjkxMzA2MTgwfQ.qi9wY6f6n06lR_Myy52HhPXZtq4-5hsd2Cx81LU60g4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"64cde8adea8cb4246622ec8a\",\n    \"start_time_in_hours\": 1,\n    \"end_time_in_hours\": 2,\n    \"multiplier\": 1.25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/time-multiplier-factor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"time-multiplier-factor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update time-multiplier-factor Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Y2M4Y2QxMDc3NmM3NjhlYmRhMWUxZCIsImlhdCI6MTY5MTIxOTc4MCwiZXhwIjoxNjkxMzA2MTgwfQ.qi9wY6f6n06lR_Myy52HhPXZtq4-5hsd2Cx81LU60g4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"64cde8adea8cb4246622ec8f\",\n    \"initial_waiting_time\": 3,\n    \"charge_per_unit_time\": 5,\n    \"time_multiplier\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/pricing/waiting-charges",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"pricing",
+								"waiting-charges"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"yashvardhan\",\n\t\"email\": \"yashvardhan@email.com\",\n\t\"password\": \"yashvardhan\"\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"yashvardhan\",\n    \"email\": \"yashvardhan@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"64cc8cd10776c768ebda1e1d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Yash\",\n\t\"email\": \"email123@email.com\",\n\t\"mobile\": \"8273585684\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/users/<id>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"<id>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/users/<id>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"<id>"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
