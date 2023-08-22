@@ -13,7 +13,7 @@ module.exports = {
       if (!email || !password) return res.status(400).send({ status: false, message: "Please add all fields" });
 
       const userExist = await userModel.findOne({ email: email });
-      if (!userExist) return res.status(404).send({ status: false, message: "User Not found." });
+      if (!userExist) return res.status(400).send({ status: false, message: "User Not found." });
 
       const passwordIsValid = bcrypt.compareSync(
         password,
